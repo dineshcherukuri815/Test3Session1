@@ -1,1 +1,78 @@
+ gcc -g p1original.c
+ gdb a.out
+GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from a.out...done.
+(gdb) b main
+Breakpoint 1 at 0x886: file p1original.c, line 23.
+(gdb) r
+Starting program: /home/runner/Test3Session1/a.out 
+warning: Error disabling address space randomization: Operation not permitted
 
+Breakpoint 1, main () at p1original.c:23
+23  {
+(gdb) n
+25    input(&num1,&den1,&num2,&den2);
+(gdb) s
+input (num1=0x7fff4d505310, den1=0x7fff4d505314, num2=0x7fff4d505318, 
+    den2=0x7fff4d50531c) at p1original.c:4
+4     printf("Enter the numerator of first num: ");
+(gdb) n
+5     scanf("%d",num1);
+(gdb) n
+Enter the numerator of first num: 1
+6     printf("Enter the numerator of first num: ");
+(gdb) n
+7     scanf("%d",den2);
+(gdb) n
+Enter the numerator of first num: 2
+8     printf("Enter the numerator of second num: ");
+(gdb) n
+9     scanf("%d",num2);
+(gdb) n
+Enter the numerator of second num: 1
+10    printf("Enter the numerator of second num: ");
+(gdb) n
+11    scanf("%d",den1);
+(gdb) n
+Enter the numerator of second num: 4
+12  }
+(gdb) n
+main () at p1original.c:26
+26    add(num1,den1,num2,den2,&num3,&den3);
+(gdb) s
+add (num1=1, den1=4, num2=1, den2=2, num3=0x7fff4d505320, den3=0x7fff4d505324)
+    at p1original.c:15
+15    *den3=den1*den2;
+(gdb) n
+16    *num3=((*den3/den1)*num1+(*den3/den2)*num2);
+(gdb) n
+17  }
+(gdb) n
+main () at p1original.c:27
+27    output(num1,den1,num2,den2,num3,den3);
+(gdb) s
+output (num1=1, den1=4, num2=1, den2=2, num3=6, den3=8) at p1original.c:20
+20    printf("sum of %d/%d and %d/%d is is%d/%d",num1,den1,num2,den2,num3,den3);
+(gdb) n
+21  }
+(gdb) n
+main () at p1original.c:28
+28    return 0;
+(gdb) n
+29  }(gdb) c
+Continuing.
+sum of 1/4 and 1/2 is is6/8[Inferior 1 (process 147) exited normally]
+(gdb) 
